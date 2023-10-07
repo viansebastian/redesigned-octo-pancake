@@ -1,18 +1,22 @@
 const express = require('express'); 
 const app = express();
-
+   
 // app.get()
 // app.post()
 // app.put()
 // app.delete()
 
-app.get('/', (request, response) => {
-    response.send('Hello World'); 
+app.get('/', (req, res) => {
+    res.send('Hello World!, from stever!'); 
 });
 
-app.get('/api/courses', (request, response) => {
-    response.send([1,2,3]);
+app.get('/api/courses', (req, res) => {
+    res.send([1,2,3]);
 });
+
+app.get('/api/courses/:id', (req, res) => {
+    res.send(req.params.id)
+})
 
 app.get('/status', function(req,res){
     const status = {
@@ -21,4 +25,5 @@ app.get('/status', function(req,res){
     res.send(status); 
 });
 
-app.listen(3000, () => console.log("Listening on port 3000"));
+const port = process.env.PORT || 3000; //$env:PORT=5000 to define local env PORT variable
+app.listen(port, () => console.log(`Listening on port ${port}...` ));
